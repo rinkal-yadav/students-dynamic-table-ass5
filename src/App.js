@@ -6,7 +6,6 @@ import Home from './Components/Home';
 import Student from './Components/Student';
 import AddStudent from './Components/AddStudent';
 import { StudentProvider } from './Components/StudentContext';
-import Edit from './Components/Edit';
 
 function App() {
   return (
@@ -18,14 +17,16 @@ function App() {
               <Route path='/' element={<Home/>}/>
               <Route path='/home' element={<Home/>}/>
               <Route path='/student' element={<Student/>}/>
+              <Route path='/edit/:id' element={<AddStudent/>}/>
               <Route path='/addstudent' element={<AddStudent/>}/>
-              <Route path='/edit/:id' element={<Edit/>}/>
+              {/* <Route path='/edit/:id' element={<Edit/>}/> */}
               <Route path='/contact' element={<Contact/>}/>
 
             </Routes>
         </Router>
     </div>
      </StudentProvider>
+    
   );
 }
 
