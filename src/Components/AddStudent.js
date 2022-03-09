@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import {  useNavigate, useParams } from 'react-router-dom'
 import { StudentContext } from './StudentContext'
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -10,7 +10,6 @@ const AddStudent = () => {
   const [addStu, setAddStu] = useState({ name: "", age: "", course: "", batch: "" })
   const [rows, setRows] = useContext(StudentContext)
   var newid = (rows.length + 1).toString()
-  const [buttonCond,setbuttoncond]=useState(true)
   
 
 
@@ -28,7 +27,6 @@ const AddStudent = () => {
           course: previous.course,
           batch: previous.batch
         })
-      setbuttoncond(!buttonCond)
 
         
       }
@@ -41,23 +39,16 @@ const AddStudent = () => {
   
 
   const Handlesubmit = () => {
-
     if (!((addStu.name) && (addStu.age) && (addStu.course) && (addStu.batch))) {
       alert("All fields are mandatory")
       return
     }
 
-    setRows([...rows, addStu])
-    Navigate(`/student`)
-
-
-
-
-
-  }
-
-  const Edit = () => {
-    setRows((pre) =>
+    {
+      id===false ? 
+      setRows([...rows, addStu])
+      :
+      setRows((pre) =>
       pre.map((student) =>
         (student.id === id) ?
           {
@@ -70,10 +61,37 @@ const AddStudent = () => {
 
       )
     )
+    }
+
     
-    Navigate('/student')
+
+    
+    Navigate(`/student`)
+
+
+
+
 
   }
+
+  // const Edit = () => {
+  //   setRows((pre) =>
+  //     pre.map((student) =>
+  //       (student.id === id) ?
+  //         {
+  //           id: id,
+  //           name: addStu.name,
+  //           course: addStu.course,
+  //           age: addStu.age,
+  //           batch: addStu.batch
+  //         } : student
+
+  //     )
+  //   )
+    
+  //   Navigate('/student')
+
+  // }
 
 
   const cancel = () => {
@@ -94,15 +112,17 @@ const AddStudent = () => {
 
       </Box>
       {
-        buttonCond ?
-        <button onClick={Handlesubmit} className='add-btn'> Add Student </button>
+        id ?
+        <button onClick={Handlesubmit} className='update'> Update </button>
         :
-        <button onClick={Edit} className='update'> Update </button>
+        <button onClick={Handlesubmit} className='add-btn'> Add Student </button>
+        
+        
         
 
       }
 
-      <button className='cancel' onClick={cancel}> Cancel </button> 
+      <button className='cancel' onClick={cancel} > Cancel </button> 
     </div>
   )
 }

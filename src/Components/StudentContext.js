@@ -2,6 +2,7 @@ import React, { createContext, useState } from 'react'
 
 export const StudentContext = createContext()
 export const StudentProvider = (props) => {
+    // const [btnCond,setBtnCond]=useState(true)
     const [student,setStudent]=useState([
         {
             id : '1',

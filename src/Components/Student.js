@@ -10,8 +10,7 @@ import TableRow from '@mui/material/TableRow';
 const Student = () => {
   const Nav=useNavigate()
    const [rows,setRows] = useContext(StudentContext)
-
-   
+     
    const remove =(index)=>{
       const newList=rows;
     newList.splice(index,1);
