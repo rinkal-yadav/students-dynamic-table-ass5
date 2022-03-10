@@ -42,13 +42,15 @@ const AddStudent = () => {
     if (!((addStu.name) && (addStu.age) && (addStu.course) && (addStu.batch))) {
       alert("All fields are mandatory")
       return
-    }
-
-    {
-      id===false ? 
+    } 
       setRows([...rows, addStu])
-      :
-      setRows((pre) =>
+      
+    Navigate(`/student`)
+
+  }
+
+  const Update = () => {
+    setRows((pre) =>
       pre.map((student) =>
         (student.id === id) ?
           {
@@ -61,37 +63,10 @@ const AddStudent = () => {
 
       )
     )
-    }
-
     
-
-    
-    Navigate(`/student`)
-
-
-
-
+    Navigate('/student')
 
   }
-
-  // const Edit = () => {
-  //   setRows((pre) =>
-  //     pre.map((student) =>
-  //       (student.id === id) ?
-  //         {
-  //           id: id,
-  //           name: addStu.name,
-  //           course: addStu.course,
-  //           age: addStu.age,
-  //           batch: addStu.batch
-  //         } : student
-
-  //     )
-  //   )
-    
-  //   Navigate('/student')
-
-  // }
 
 
   const cancel = () => {
@@ -100,6 +75,24 @@ const AddStudent = () => {
 
 
   return (
+    <>
+    {
+      id ?
+      <div>
+      <Box component="form" sx={{ '& > :not(style)': { m: 4, width: '60ch' }, }}
+        noValidate
+        autoComplete="off">
+
+        <TextField required id="outlined-basic" label="Name" variant="outlined" name='name' value={addStu.name} onChange={handle} />
+        <TextField required id="outlined-basic" label="Age" variant="outlined" name='age' value={addStu.age} onChange={handle} />
+        <TextField required id="outlined-basic" label="Course" variant="outlined" name='course' value={addStu.course} onChange={handle} />
+        <TextField required id="outlined-basic" label="Batch" variant="outlined" name='batch' value={addStu.batch} onChange={handle} />
+
+      </Box>            
+        <button onClick={Update} className='update'> Submit </button>
+        <button className='cancel' onClick={cancel} > Cancel </button> 
+    </div>
+    :
     <div>
       <Box component="form" sx={{ '& > :not(style)': { m: 4, width: '60ch' }, }}
         noValidate
@@ -110,20 +103,13 @@ const AddStudent = () => {
         <TextField required id="outlined-basic" label="Course" variant="outlined" name='course' value={addStu.course} onChange={handle} />
         <TextField required id="outlined-basic" label="Batch" variant="outlined" name='batch' value={addStu.batch} onChange={handle} />
 
-      </Box>
-      {
-        id ?
-        <button onClick={Handlesubmit} className='update'> Update </button>
-        :
-        <button onClick={Handlesubmit} className='add-btn'> Add Student </button>
-        
-        
-        
-
-      }
-
-      <button className='cancel' onClick={cancel} > Cancel </button> 
+      </Box>            
+        <button onClick={Handlesubmit} className='update'> Submit </button>
+        <button className='cancel' onClick={cancel} > Cancel </button> 
     </div>
+    }
+    </>
+    
   )
 }
 
